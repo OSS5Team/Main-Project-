@@ -47,7 +47,7 @@ def get_size(link_list):
   return "complete getting size data"
               
 
-
+      
 print(get_list(main_url))
 print()
 print(name_list[0])
@@ -56,6 +56,21 @@ print(link_list[0])
 print()
 print(get_size(link_list[0]))
 print(size_list)
+
+size_dic_list = []
+def save_size(name_list, img_list, link_list):
+  test_dic = {name_list[0]: None}
+  temp_size_list = list()
+  for i in size_list:
+    if '(' in str(i):
+      print(i)
+      temp_size_list.append(size_list[size_list.index(i):size_list.index(i)+7])
+  test_dic = {name_list[0]:temp_size_list}
+  size_dic_list.append(test_dic)
+      
+print(size_dic_list)
+   
+
 
 
 
