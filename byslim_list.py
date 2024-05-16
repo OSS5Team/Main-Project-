@@ -9,7 +9,7 @@ main_url = "https://www.byslim.com/category/top/6/"
 chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 
-name_list, img_list, link_list, size_list = [], [], [], []
+name_list, img_list, link_list, size_dic_list = [], [], [], []
 
 def get_list(url):
   driver.get(url)
@@ -29,7 +29,8 @@ def get_list(url):
   
   return "complete getting list data"
 
-def get_size(link_list):
+def get_size(link_list,name_list):
+  size_list = list()
   url = link_list
   driver.get(url)
   driver.implicitly_wait(time_to_wait=5)
@@ -43,31 +44,27 @@ def get_size(link_list):
               break 
           else: 
               size_list.append(td.text.strip())  
-  
+  save_size(name_list, size_list)
   return "complete getting size data"
               
-
-      
-print(get_list(main_url))
-print()
-print(name_list[0])
-print(img_list[0])
-print(link_list[0])
-print()
-print(get_size(link_list[0]))
-print(size_list)
-
-size_dic_list = []
-def save_size(name_list, img_list, link_list):
+def save_size(name_list, size_list):
   test_dic = {name_list[0]: None}
   temp_size_list = list()
   for i in size_list:
     if '(' in str(i):
-      print(i)
       temp_size_list.append(size_list[size_list.index(i):size_list.index(i)+7])
   test_dic = {name_list[0]:temp_size_list}
   size_dic_list.append(test_dic)
       
+print(get_list(main_url))
+print(len(name_list))
+print(len(img_list))
+print(len(link_list))
+
+for index in range(3):
+   get_size(link_list[index], name_list)
+
+
 print(size_dic_list)
    
 
