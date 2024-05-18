@@ -56,33 +56,41 @@ def get_size(link_list,name_list):
   return "complete getting size data"
               
 def save_size(name_list, size_list):
-  test_dic = {name_list[0]: None}
+  test_dic = {name_list: None}
   temp_size_list = list()
   for i in size_list:
     if '(' in str(i):
       temp_size_list.append(size_list[size_list.index(i):size_list.index(i)+7])
-  test_dic = {name_list[0]:temp_size_list}
+  test_dic = {name_list:temp_size_list}
   # dictionary 형태로 데이터 저장하기
   size_dic_list.append(test_dic)
       
+
+
 print(get_list(main_url))
 print(len(name_list))
 print(len(img_list))
 print(len(link_list))
 
-for index in range(3):
-   get_size(link_list[index], name_list)
 
+
+for index in range(3):
+   get_size(link_list[index], name_list[index])
 
 
 def check_size_data(d):
-    for key, value in d.items():
-        print(f'{key}: {value}')
+  for key, value in d.items():
+      print(f'{key}: {value}')
 
 for j in range(3):
   check_size_data(size_dic_list[j])
+  print(name_list[j])
+  print(img_list[j])
+  print(link_list[j])
   print()
   print()
+  print()
+
 
 
 
