@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import chromedriver_autoinstaller
+import pandas as pd
 
 
 main_url = "https://www.byslim.com/category/top/6/"
@@ -92,6 +93,18 @@ for j in range(3):
   print()
 
 
+data = {
+  'Name' : name_list,
+  'Img' : img_list,
+  'Link' : link_list,
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+
+
+# 데이터 저장을 위한 판다스 데이터 프레임 생성
 
 
 
