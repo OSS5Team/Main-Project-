@@ -104,7 +104,19 @@ df = pd.DataFrame(data)
 print(df)
 
 
-# 데이터 저장을 위한 판다스 데이터 프레임 생성
+data_rows = []
+def dataframe_dictionary(dictionary):
+    for name, sizes in dictionary.items():
+        for size_info in sizes:
+            size = size_info[0]
+            size_numbers = size_info[1:]
+            data_rows.append([name, size, ', '.join(size_numbers)])
+
+for i in range(3):
+  dataframe_dictionary(size_dic_list[i])
+
+df = pd.DataFrame(data_rows, columns=['name', 'size', 'size_number'])
+print(df)
 
 
 
