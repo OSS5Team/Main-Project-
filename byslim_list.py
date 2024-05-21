@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import chromedriver_autoinstaller
 import pandas as pd
+import psycopg2
 
 
 main_url = "https://www.byslim.com/category/top/6/"
@@ -103,7 +104,6 @@ df = pd.DataFrame(data)
 
 print(df)
 
-
 data_rows = []
 def dataframe_dictionary(dictionary):
     for name, sizes in dictionary.items():
@@ -119,8 +119,27 @@ df = pd.DataFrame(data_rows, columns=['name', 'size', 'size_number'])
 print(df)
 
 
+host = "localhost"
+database = "test"
+user = "Test"
+password = "1234"
+   
+
+try:
+    connection = psycopg2.connect(
+        host=host,
+        database=database,
+        user=user,
+        password=password
+    )
+    cursor = connection.cursor()
+    print("연결 성공!")
+
+except psycopg2.Error as e:
+    print("연결 실패:", e)
 
 
+# PostgreSQL 설치 및 python 연결
 
 
 
