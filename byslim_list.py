@@ -4,7 +4,9 @@ from selenium import webdriver
 import chromedriver_autoinstaller
 import pandas as pd
 import psycopg2
-
+from psycopg2 import sql
+import pandas as pd
+from sqlalchemy import create_engine
 
 main_url = "https://www.byslim.com/category/top/6/"
 
@@ -76,7 +78,7 @@ print(len(link_list))
 
 
 
-for index in range(3):
+for index in range(59):
    get_size(link_list[index], name_list[index])
 
 
@@ -100,23 +102,21 @@ data = {
   'Link' : link_list,
 }
 
-df = pd.DataFrame(data)
+product_df = pd.DataFrame(data)
 
-print(df)
+# 데이터를 담을 리스트 초기화
+data = []
 
-data_rows = []
-def dataframe_dictionary(dictionary):
-    for name, sizes in dictionary.items():
+# size_dic_list를 순회하면서 데이터 수집
+for dic in size_dic_list:
+    for name, sizes in dic.items():
         for size_info in sizes:
-            size = size_info[0]
-            size_numbers = size_info[1:]
-            data_rows.append([name, size, ', '.join(size_numbers)])
+            row = [name] + size_info
+            data.append(row)
 
-for i in range(3):
-  dataframe_dictionary(size_dic_list[i])
-
-df = pd.DataFrame(data_rows, columns=['name', 'size', 'size_number'])
-print(df)
+# 데이터프레임 생성
+columns = ['Name', 'Size', 'Shoulder Width', 'Chest Circumference', 'Hem Width', 'Sleeve Length', 'Sleeve Opening', 'Total Length']
+size_info_df = pd.DataFrame(data, columns=columns)
 
 
 host = "localhost"
@@ -139,7 +139,24 @@ except psycopg2.Error as e:
     print("연결 실패:", e)
 
 
-# PostgreSQL 설치 및 python 연결
+connection_string = f'postgresql://{user}:{password}@{host}/{database}'
+
+# SQLAlchemy 엔진 생성 (engine 정의)
+engine = create_engine(connection_string)
+# 데이터프레임을 PostgreSQL에 쓰기
+product_table_name = 'byslim_products'
+size_info_table_name = 'byslim_size_info'
+
+# product_df 쓰기
+with engine.connect() as connection:
+    product_df.to_sql(product_table_name, connection, if_exists='replace', index=False, schema='public')
+
+# size_info_df 쓰기
+with engine.connect() as connection:
+    size_info_df.to_sql(size_info_table_name, connection, if_exists='replace', index=False, schema='public')
+
+print("데이터프레임을 PostgreSQL 테이블로 성공적으로 저장하였습니다.")
 
 
-
+# 데이터 프레임 PostgreSQL에 저장
+## 주석 달기 및 사이즈 데이터 저장 함수 테스트 및 확인
