@@ -25,35 +25,19 @@ if response.status_code == 200:
         for product in product_list:
             # 제품 가격 추출
             price_tag = product.find('li', title='판매가')
-            if price_tag:
-                price_span = price_tag.find('span', style="font-size:11px;color:#333333;font-weight:bold;")
-                product_price = price_span.text.strip() if price_span else 'No price found'
-            else:
-                product_price = 'No price found'
+            product_price = price_tag.text.strip() if price_tag else 'No price found'
 
             # 상품 요약 정보 추출
             summary_tag = product.find('li', title='상품요약정보')
-            if summary_tag:
-                summary_span = summary_tag.find('span', style="font-size:11px;color:#a8a8a8;")
-                product_summary = summary_span.text.strip() if summary_span else 'No summary found'
-            else:
-                product_summary = 'No summary found'
+            product_summary = summary_tag.text.strip() if summary_tag else 'No summary found'
 
             # 사용 후기 추출
             review_tag = product.find('li', title='사용후기')
-            if review_tag:
-                review_span = review_tag.find('span', style="font-size:12px;color:#ffffff;")
-                product_review = review_span.text.strip() if review_span else 'No review found'
-            else:
-                product_review = 'No review found'
+            product_review = review_tag.text.strip() if review_tag else 'No review found'
 
             # 상품 문의 추출
             question_tag = product.find('li', title='상품문의')
-            if question_tag:
-                question_span = question_tag.find('span', style="font-size:12px;color:#ffffff;")
-                product_question = question_span.text.strip() if question_span else 'No question found'
-            else:
-                product_question = 'No question found'
+            product_question = question_tag.text.strip() if question_tag else 'No question found'
 
             # 추출한 정보 출력
             print(f'가격: {product_price}')
