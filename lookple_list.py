@@ -9,7 +9,7 @@ main_url = "https://lookple.com/category/top/26/"
 chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 
-name_list, img_list, link_list = [], [], []
+name_list, img_list, link_list, size_list = [], [], [], []
 
 def get_list(url):
   driver.get(url)
@@ -29,17 +29,34 @@ def get_list(url):
   
   return "complete getting list data"
 
+def get_size(link_list,name_list):
+  size_list = list()
+  url = link_list
+  driver.get(url)
+  driver.implicitly_wait(time_to_wait=5)
+  page = driver.page_source
+  soup = BeautifulSoup(page, "html.parser")
 
-get_list(main_url)
-print(name_list)
+  div_tags = soup.find_all('div', style=lambda value: value and 'text-align: center;' in value)
+  for div in div_tags:
+    if "총장" in div.text.strip():
+      size_list.append(div.text.strip())  
+  print(size_list)
+  return "complete getting size data"
+
+
+print(get_list(main_url))
 print()
-print(img_list)
+print(name_list[0])
+print(img_list[0])
+print(link_list[0])
 print()
-print(link_list)
+print(get_size(link_list[1], name_list[1]))
+print(size_list)
    
 
-# 상품 리스트 데이터 가져오기
 
+# 상품 사이즈 데이터 가져오기
 
 
 
