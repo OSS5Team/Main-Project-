@@ -9,7 +9,7 @@ main_url = "https://lookple.com/category/top/26/"
 chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 
-name_list, img_list, link_list, size_list = [], [], [], []
+name_list, img_list, link_list, size_list, size_dic_list = [], [], [], [], []
 
 def get_list(url):
   driver.get(url)
@@ -30,7 +30,6 @@ def get_list(url):
   return "complete getting list data"
 
 def get_size(link_list,name_list):
-  size_list = list()
   url = link_list
   driver.get(url)
   driver.implicitly_wait(time_to_wait=5)
@@ -45,6 +44,8 @@ def get_size(link_list,name_list):
   return "complete getting size data"
 
 
+
+
 print(get_list(main_url))
 print()
 print(name_list[0])
@@ -54,9 +55,17 @@ print()
 print(get_size(link_list[1], name_list[1]))
 print(size_list)
    
+test_dic = {name_list[0]: None}
+temp_size_list = list()
+for i in size_list:
+  temp_size_list.append(i)
+test_dic = {name_list[0]:temp_size_list}
+size_dic_list.append(test_dic)
 
+print(size_dic_list)
 
-# 상품 사이즈 데이터 가져오기
+# dictionery형태로 key : 상품이름 value : [이름 : 사이즈] 형태로 저장
+
 
 
 
