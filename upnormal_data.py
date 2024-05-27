@@ -39,16 +39,11 @@ if response.status_code == 200:
             question_tag = product.find('li', title='상품문의')
             product_question = question_tag.text.strip() if question_tag else 'No question found'
 
-            # 제품 이미지 URL 추출
-            img_tag = product.find('img')
-            product_image_url = img_tag['src'] if img_tag else 'No image found'
-
             # 추출한 정보 출력
             print(f'가격: {product_price}')
             print(f'요약 정보: {product_summary}')
             print(f'사용 후기: {product_review}')
             print(f'상품 문의: {product_question}')
-            print(f'이미지 URL: {product_image_url}')
             print('-' * 20)
     else:
         print('제품 리스트를 찾을 수 없습니다.')
