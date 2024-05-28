@@ -1,21 +1,51 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
-url = 'https://hisfit.co.kr/'
-response = requests.get(url)
+# 대상 웹페이지 URL
+url = 'https://hisfit.co.kr/category/outer/24/'
 
-# Check if the request was successful
+# 사용자 에이전트 설정
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+}
+
+# 웹사이트에 GET 요청 보내기
+response = requests.get(url, headers=headers)
+
+# 요청이 성공했는지 확인
 if response.status_code == 200:
-    page_content = response.content
-    soup = BeautifulSoup(page_content, 'html.parser')
-    
-    # Example: Extract product names and prices
-    products = soup.find_all('div', class_='item-cont')
+    # 페이지의 HTML 내용을 파싱
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-    for product in products:
-        name = product.find('div', class_='title').get_text(strip=True)
-        price = product.find('div', class_='price').get_text(strip=True)
-        print(f'Product Name: {name}, Price: {price}')
+    # 제품 정보를 담고 있는 컨테이너 찾기
+    products = soup.find_all('div', class_='description')
+
+    if products:
+        # 각 제품을 순회하면서 정보 추출
+        for product in products:
+            # 제품명 추출
+            name_tag = product.find('strong', class_='name')
+            name = name_tag.text.strip() if name_tag else '상품명 없음'
+
+            # 가격 추출
+            price_tag = product.find('li', class_='xans-record-', rel='판매가')
+            price_text = price_tag.find('span').text.strip() if price_tag else '가격 정보 없음'
+            price = re.findall(r'\d+', price_text)  # 숫자만 추출
+            price = ''.join(price) if price else '가격 정보 없음'
+
+            # 상품 요약 정보 추출
+            summary_tag = product.find('li', rel='상품요약정보')
+            summary = summary_tag.text.strip() if summary_tag else '요약 정보 없음'
+
+            # 출력
+            print("상품명:", name)
+            print("판매가:", price)
+            print("상품 요약 정보:", summary)
+            print('-' * 50)
+    else:
+        print('제품 정보를 찾을 수 없습니다.')
 else:
-    print('Failed to retrieve the webpage')
+    print('웹페이지를 불러오는데 실패했습니다. 상태 코드:', response.status_code)
+
 
