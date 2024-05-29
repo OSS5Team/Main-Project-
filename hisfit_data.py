@@ -38,14 +38,18 @@ if response.status_code == 200:
             summary_tag = product.find('li', rel='상품요약정보')
             summary = summary_tag.text.strip() if summary_tag else '요약 정보 없음'
 
+            # 이미지 URL 추출
+            image_tag = product.find('img')
+            image_url = image_tag['src'] if image_tag else '이미지 없음'
+
             # 출력
             print("상품명:", name)
             print("판매가:", price)
             print("상품 요약 정보:", summary)
+            print("이미지 URL:", image_url)
             print('-' * 50)
     else:
         print('제품 정보를 찾을 수 없습니다.')
 else:
     print('웹페이지를 불러오는데 실패했습니다. 상태 코드:', response.status_code)
-
 
