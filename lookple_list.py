@@ -9,7 +9,7 @@ main_url = "https://lookple.com/category/top/26/"
 chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 
-name_list, img_list, link_list, size_list, size_dic_list, converted_size_dic_list = [], [], [], [], [], []
+name_list, img_list, link_list, size_dic_list, converted_size_dic_list = [], [], [], [], []
 
 def get_list(url):
   driver.get(url)
@@ -30,6 +30,7 @@ def get_list(url):
   return "complete getting list data"
 
 def get_size(link_list,name_list):
+  size_list = []
   url = link_list
   driver.get(url)
   driver.implicitly_wait(time_to_wait=5)
@@ -51,11 +52,12 @@ def save_size(name_list, size_list):
     break
   test_dic = {name_list:temp_size_list}
   size_dic_list.append(test_dic)
+  print(size_dic_list)
+  print()
   return "complete save data"
 
 import re
 def parse_description(description):
-    # 사이즈 명칭과 측정 값 분리
     size_names = ['FREE', 'S', 'M', 'L', 'XL', 'XLL']
     name_match = re.match(r'^(FREE|S|M|L|XL|XLL)\s*:', description)
     if name_match:
@@ -65,13 +67,11 @@ def parse_description(description):
         name = ""
         measurements = description
 
-    # 측정 값을 키워드와 값으로 분리
     measurement_keywords = ['어깨', '가슴', '소매', '암홀', '총장', '허리', '밑위', '허벅지', '밑단']
     clean_measurements = re.split(r'\s+', measurements)
     
-    size_values = [None] * 6  # None으로 초기화된 6개의 리스트 생성
+    size_values = [None] * 6 
 
-    # 키워드와 인덱스를 매핑
     keyword_indices = {'어깨': 0, '가슴': 1, '소매': 3, '암홀': 4, '총장': 5, '허리': 6, '밑위': 7, '허벅지': 8, '밑단': 9}
 
     current_index = 0
@@ -91,8 +91,7 @@ def split_descriptions(text):
     pattern = r'(?<=\d)(?=[가-힣]+\s*:|[A-Z]+\s*:)'
     return re.split(pattern, text)
 
-
-def data_cleansing(size_dic_list): 
+def data_cleansing():
   for item in size_dic_list:
       new_item = {}
       for key, value in item.items():
@@ -102,14 +101,26 @@ def data_cleansing(size_dic_list):
       converted_size_dic_list.append(new_item)
 
 print(get_list(main_url))
-for index in range(10):
-    get_size(link_list[index], name_list[index])
+# print(get_size(link_list[0], name_list[0]))
+# print(get_size(link_list[1], name_list[1]))
+# print(get_size(link_list[2], name_list[2]))
+# print("최종")
+# print(size_dic_list)
 
+print(get_list(main_url))
+for index in range(5):
+  get_size(link_list[index], name_list[index])
+
+
+print()
 print(size_dic_list)
-data_cleansing(size_dic_list)
+data_cleansing()
 print(converted_size_dic_list)
 
-# 함수화
+
+
+
+# 버그 수정
 
 
 
