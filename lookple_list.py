@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import chromedriver_autoinstaller
+import pandas as pd
+
 
 main_url = "https://lookple.com/category/top/26/"
 
@@ -115,13 +117,17 @@ data_cleansing()
 print(converted_size_dic_list)
 
 
+data = {
+  'Name' : name_list,
+  'Img' : img_list,
+  'Link' : link_list,
+} 
 
-# 버그 수정 및 테스트 및 주석 추가
+df = pd.DataFrame(data)
 
+print(df)
 
-
-
-
+# 상품 리스트의 이름 img link 데이터 프레임으로 저장
 
 
 
