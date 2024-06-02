@@ -127,7 +127,23 @@ df = pd.DataFrame(data)
 
 print(df)
 
-# 상품 리스트의 이름 img link 데이터 프레임으로 저장
+# 데이터를 담을 리스트 초기화
+data = []
+
+# name_list와 converted_size_dic_list를 순회하면서 데이터 수집
+for name in name_list:
+    for dic in converted_size_dic_list:
+        if name in dic:
+            for size_info in dic[name]:
+                row = [name] + size_info
+                data.append(row)
+
+# 데이터프레임 생성
+columns = ['Name', 'Size', 'Shoulder Width', 'Chest Circumference', 'Hem Width', 'Sleeve Length', 'Sleeve Opening', 'Total Length']
+df = pd.DataFrame(data, columns=columns)
+
+print(df)
+df.to_csv('clothing_sizes.csv', index=False)
 
 
-
+# size데이터 데이터 프레임에 저장
