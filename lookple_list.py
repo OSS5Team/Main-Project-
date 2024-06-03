@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import chromedriver_autoinstaller
 import pandas as pd
+import psycopg2
 
 
 main_url = "https://lookple.com/category/top/26/"
@@ -107,7 +108,7 @@ def data_cleansing():
 
 
 print(get_list(main_url))
-for index in range(10):
+for index in range(1):
   get_size(link_list[index], name_list[index])
 
 
@@ -143,7 +144,28 @@ columns = ['Name', 'Size', 'Shoulder Width', 'Chest Circumference', 'Hem Width',
 df = pd.DataFrame(data, columns=columns)
 
 print(df)
-df.to_csv('clothing_sizes.csv', index=False)
 
 
 # size데이터 데이터 프레임에 저장
+
+host = "localhost"
+database = "test"
+user = "Test"
+password = "1234"
+   
+
+try:
+    connection = psycopg2.connect(
+        host=host,
+        database=database,
+        user=user,
+        password=password
+    )
+    cursor = connection.cursor()
+    print("연결 성공!")
+
+except psycopg2.Error as e:
+    print("연결 실패:", e)
+
+
+# PostgreSQL 설치 및 python 연결
