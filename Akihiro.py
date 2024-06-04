@@ -1,4 +1,5 @@
 print("test")
 print("Akihiro")
 #test
-Print("monday")
+print("monday")
+print("수정")
