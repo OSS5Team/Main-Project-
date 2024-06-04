@@ -29,14 +29,16 @@ if response.status_code == 200:
             name = name_tag.text.strip() if name_tag else '상품명 없음'
 
             # 가격 추출
-            price_tag = product.find('li', class_='xans-record-', rel='판매가')
-            price_text = price_tag.find('span').text.strip() if price_tag else '가격 정보 없음'
+            price_tag = product.find('li', rel='판매가')
+            price_span = price_tag.find('span', style='font-size:12px;color:#101010;font-weight:bold;')
+            price_text = price_span.text.strip() if price_span else '가격 정보 없음'
             price = re.findall(r'\d+', price_text)  # 숫자만 추출
             price = ''.join(price) if price else '가격 정보 없음'
 
             # 상품 요약 정보 추출
             summary_tag = product.find('li', rel='상품요약정보')
-            summary = summary_tag.text.strip() if summary_tag else '요약 정보 없음'
+            summary_span = summary_tag.find('span', style='font-size:12px;color:#aaaaaa;')
+            summary = summary_span.text.strip() if summary_span else '요약 정보 없음'
 
             # 이미지 URL 추출
             image_tag = product.find('img')
@@ -52,4 +54,3 @@ if response.status_code == 200:
         print('제품 정보를 찾을 수 없습니다.')
 else:
     print('웹페이지를 불러오는데 실패했습니다. 상태 코드:', response.status_code)
-
