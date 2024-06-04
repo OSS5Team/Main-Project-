@@ -26,19 +26,37 @@ if response.status_code == 200:
         for product in products:
             # 제품명 추출
             name_tag = product.find('strong', class_='name')
-            name = name_tag.text.strip() if name_tag else '상품명 없음'
+            if name_tag:
+                name = name_tag.find('span', style='font-size:13px;color:#101010;')
+                name = name.text.strip() if name else '상품명 없음'
+            else:
+                name = '상품명 없음'
 
             # 가격 추출
             price_tag = product.find('li', rel='판매가')
-            price_span = price_tag.find('span', style='font-size:12px;color:#101010;font-weight:bold;')
-            price_text = price_span.text.strip() if price_span else '가격 정보 없음'
-            price = re.findall(r'\d+', price_text)  # 숫자만 추출
-            price = ''.join(price) if price else '가격 정보 없음'
+            if price_tag:
+                price_span = price_tag.find('span', style='font-size:12px;color:#101010;font-weight:bold;')
+                price_text = price_span.text.strip() if price_span else '가격 정보 없음'
+                price = re.findall(r'\d+', price_text)  # 숫자만 추출
+                price = ''.join(price) if price else '가격 정보 없음'
+            else:
+                price = '가격 정보 없음'
 
             # 상품 요약 정보 추출
             summary_tag = product.find('li', rel='상품요약정보')
-            summary_span = summary_tag.find('span', style='font-size:12px;color:#aaaaaa;')
-            summary = summary_span.text.strip() if summary_span else '요약 정보 없음'
+            if summary_tag:
+                summary_span = summary_tag.find('span', style='font-size:12px;color:#aaaaaa;')
+                summary = summary_span.text.strip() if summary_span else '요약 정보 없음'
+            else:
+                summary = '요약 정보 없음'
+
+            # 모델 정보 추출
+            model_tag = product.find('li', rel='모델')
+            if model_tag:
+                model_span = model_tag.find('span', style='font-size:12px;color:#555555;')
+                model = model_span.text.strip() if model_span else '모델 정보 없음'
+            else:
+                model = '모델 정보 없음'
 
             # 이미지 URL 추출
             image_tag = product.find('img')
@@ -48,6 +66,7 @@ if response.status_code == 200:
             print("상품명:", name)
             print("판매가:", price)
             print("상품 요약 정보:", summary)
+            print("모델 정보:", model)
             print("이미지 URL:", image_url)
             print('-' * 50)
     else:
