@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import re
 
 # 대상 웹페이지 URL
 url = 'https://hisfit.co.kr/category/outer/24/'
@@ -19,57 +18,29 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # 제품 정보를 담고 있는 컨테이너 찾기
-    products = soup.find_all('div', class_='description')
+    product_list = soup.find_all('div', class_='description')
 
-    if products:
+    if product_list:
         # 각 제품을 순회하면서 정보 추출
-        for product in products:
+        for product in product_list:
             # 제품명 추출
             name_tag = product.find('strong', class_='name')
-            if name_tag:
-                name = name_tag.find('span', style='font-size:13px;color:#101010;')
-                name = name.text.strip() if name else '상품명 없음'
-            else:
-                name = '상품명 없음'
+            product_name = name_tag.text.strip() if name_tag else 'No name found'
 
-            # 가격 추출
-            price_tag = product.find('li', rel='판매가')
-            if price_tag:
-                price_span = price_tag.find('span', style='font-size:12px;color:#101010;font-weight:bold;')
-                price_text = price_span.text.strip() if price_span else '가격 정보 없음'
-                price = re.findall(r'\d+', price_text)  # 숫자만 추출
-                price = ''.join(price) if price else '가격 정보 없음'
-            else:
-                price = '가격 정보 없음'
+            # 제품 가격 추출
+            price_tag = product.find('li', attrs={'rel': '판매가'})
+            product_price = price_tag.find('span').text.strip() if price_tag else 'No price found'
 
             # 상품 요약 정보 추출
-            summary_tag = product.find('li', rel='상품요약정보')
-            if summary_tag:
-                summary_span = summary_tag.find('span', style='font-size:12px;color:#aaaaaa;')
-                summary = summary_span.text.strip() if summary_span else '요약 정보 없음'
-            else:
-                summary = '요약 정보 없음'
+            summary_tag = product.find('li', attrs={'rel': '상품요약정보'})
+            product_summary = summary_tag.text.strip() if summary_tag else 'No summary found'
 
-            # 모델 정보 추출
-            model_tag = product.find('li', rel='모델')
-            if model_tag:
-                model_span = model_tag.find('span', style='font-size:12px;color:#555555;')
-                model = model_span.text.strip() if model_span else '모델 정보 없음'
-            else:
-                model = '모델 정보 없음'
-
-            # 이미지 URL 추출
-            image_tag = product.find('img')
-            image_url = image_tag['src'] if image_tag else '이미지 없음'
-
-            # 출력
-            print("상품명:", name)
-            print("판매가:", price)
-            print("상품 요약 정보:", summary)
-            print("모델 정보:", model)
-            print("이미지 URL:", image_url)
-            print('-' * 50)
+            # 추출한 정보 출력
+            print(f'제품명: {product_name}')
+            print(f'가격: {product_price}')
+            print(f'요약 정보: {product_summary}')
+            print('-' * 20)
     else:
-        print('제품 정보를 찾을 수 없습니다.')
+        print('제품 리스트를 찾을 수 없습니다.')
 else:
     print('웹페이지를 불러오는데 실패했습니다. 상태 코드:', response.status_code)
