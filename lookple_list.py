@@ -4,6 +4,9 @@ from selenium import webdriver
 import chromedriver_autoinstaller
 import pandas as pd
 import psycopg2
+from psycopg2 import sql
+import pandas as pd
+from sqlalchemy import create_engine
 
 
 main_url = "https://lookple.com/category/top/26/"
@@ -28,7 +31,7 @@ def get_list(url):
       if prd_div:
         link_list.append("https://lookple.com" + prd_div.find('a')['href'])
         name_list.append(prd_div.find('img')['alt'])
-        img_list.append(prd_div.find('img')['src'])
+        img_list.append("https:" + prd_div.find('img')['src'])
   
   return "complete getting list data"
 
@@ -108,7 +111,7 @@ def data_cleansing():
 
 
 print(get_list(main_url))
-for index in range(1):
+for index in range(40):
   get_size(link_list[index], name_list[index])
 
 
@@ -124,9 +127,8 @@ data = {
   'Link' : link_list,
 } 
 
-df = pd.DataFrame(data)
+product_df = pd.DataFrame(data)
 
-print(df)
 
 # 데이터를 담을 리스트 초기화
 data = []
@@ -141,9 +143,7 @@ for name in name_list:
 
 # 데이터프레임 생성
 columns = ['Name', 'Size', 'Shoulder Width', 'Chest Circumference', 'Hem Width', 'Sleeve Length', 'Sleeve Opening', 'Total Length']
-df = pd.DataFrame(data, columns=columns)
-
-print(df)
+size_info_df = pd.DataFrame(data, columns=columns)
 
 
 # size데이터 데이터 프레임에 저장
@@ -167,5 +167,23 @@ try:
 except psycopg2.Error as e:
     print("연결 실패:", e)
 
+connection_string = f'postgresql://{user}:{password}@{host}/{database}'
 
-# PostgreSQL 설치 및 python 연결
+# SQLAlchemy 엔진 생성 (engine 정의)
+engine = create_engine(connection_string)
+# 데이터프레임을 PostgreSQL에 쓰기
+product_table_name = 'lookple_products'
+size_info_table_name = 'lookple_size_info'
+
+# product_df 쓰기
+with engine.connect() as connection:
+    product_df.to_sql(product_table_name, connection, if_exists='replace', index=False, schema='public')
+
+# size_info_df 쓰기
+with engine.connect() as connection:
+    size_info_df.to_sql(size_info_table_name, connection, if_exists='replace', index=False, schema='public')
+
+print("데이터프레임을 PostgreSQL 테이블로 성공적으로 저장하였습니다.")
+
+
+# 데이터 프레임 PostgreSQL에 저장

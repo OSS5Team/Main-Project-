@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Product List</h1>
+    <div class="product-grid">
+        <% products.forEach(product => { %>
+            <div class="product-card">
+                <img src="<%= product.Img %>" alt="<%= product.Name %>">
+                <div class="product-info">
+                    <h2><%= product.Name %></h2>
+                    <p>Size: <%= product.Size %></p>
+                    <p>Shoulder Width: <%= product["Shoulder Width"] %></p>
+                    <p>Chest Circumference: <%= product["Chest Circumference"] %></p>
+                    <p>Hem Width: <%= product["Hem Width"] %></p>
+                    <p>Sleeve Length: <%= product["Sleeve Length"] %></p>
+                    <p>Sleeve Opening: <%= product["Sleeve Opening"] %></p>
+                    <p>Total Length: <%= product["Total Length"] %></p>
+                    <a href="<%= product.Link %>" target="_blank">View Product</a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
