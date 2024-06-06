@@ -16,7 +16,7 @@ app.use(express.static('public'));
 
 app.get('/', async (req, res) => {
     try {
-        const query = `
+        const query1 = `
             SELECT p."Name", p."Img", p."Link", 
                    s."Size", s."Shoulder Width", s."Chest Circumference", 
                    s."Hem Width", s."Sleeve Length", s."Sleeve Opening", s."Total Length"
@@ -24,8 +24,21 @@ app.get('/', async (req, res) => {
             LEFT JOIN byslim_size_info s ON p."Name" = s."Name"
         `;
 
-        const result = await pool.query(query);
-        const products = result.rows;
+        const query2 = `
+            SELECT p."Name", p."Img", p."Link", 
+                   s."Size", s."Shoulder Width", s."Chest Circumference", 
+                   s."Hem Width", s."Sleeve Length", s."Sleeve Opening", s."Total Length"
+            FROM lookple_products p
+            LEFT JOIN lookple_size_info s ON p."Name" = s."Name"
+        `;
+
+        const result1 = await pool.query(query1);
+        const result2 = await pool.query(query2);
+
+        const byslimProducts = result1.rows;
+        const lookpleProducts = result2.rows;
+
+        const products = byslimProducts.concat(lookpleProducts);
 
         console.log(products); // 디버깅을 위해 데이터 출력
 
