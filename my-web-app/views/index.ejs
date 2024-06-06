@@ -8,6 +8,41 @@
 </head>
 <body>
     <h1>Product List</h1>
+    <form method="GET" action="/" class="search-form">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="size">Size:</label>
+            <input type="text" id="size" name="size">
+        </div>
+        <div class="form-group">
+            <label for="shoulder_width">Shoulder Width:</label>
+            <input type="number" id="shoulder_width" name="shoulder_width" min="0">
+        </div>
+        <div class="form-group">
+            <label for="chest_circumference">Chest Circumference:</label>
+            <input type="number" id="chest_circumference" name="chest_circumference" min="0">
+        </div>
+        <div class="form-group">
+            <label for="hem_width">Hem Width:</label>
+            <input type="number" id="hem_width" name="hem_width" min="0">
+        </div>
+        <div class="form-group">
+            <label for="sleeve_length">Sleeve Length:</label>
+            <input type="number" id="sleeve_length" name="sleeve_length" min="0">
+        </div>
+        <div class="form-group">
+            <label for="sleeve_opening">Sleeve Opening:</label>
+            <input type="number" id="sleeve_opening" name="sleeve_opening" min="0">
+        </div>
+        <div class="form-group">
+            <label for="total_length">Total Length:</label>
+            <input type="number" id="total_length" name="total_length" min="0">
+        </div>
+        <button type="submit">Search</button>
+    </form>
     <div class="product-grid">
         <% products.forEach(product => { %>
             <div class="product-card">

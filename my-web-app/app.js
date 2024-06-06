@@ -13,34 +13,63 @@ const pool = new Pool({
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', async (req, res) => {
     try {
-        const query1 = `
+        const { name, size, shoulder_width, chest_circumference, hem_width, sleeve_length, sleeve_opening, total_length } = req.query;
+
+        let query = `
             SELECT p."Name", p."Img", p."Link", 
                    s."Size", s."Shoulder Width", s."Chest Circumference", 
                    s."Hem Width", s."Sleeve Length", s."Sleeve Opening", s."Total Length"
             FROM byslim_products p
             LEFT JOIN byslim_size_info s ON p."Name" = s."Name"
-        `;
-
-        const query2 = `
+            UNION
             SELECT p."Name", p."Img", p."Link", 
                    s."Size", s."Shoulder Width", s."Chest Circumference", 
                    s."Hem Width", s."Sleeve Length", s."Sleeve Opening", s."Total Length"
             FROM lookple_products p
             LEFT JOIN lookple_size_info s ON p."Name" = s."Name"
+            WHERE 1=1
         `;
 
-        const result1 = await pool.query(query1);
-        const result2 = await pool.query(query2);
+        const queryParams = [];
+        if (name) {
+            query += ` AND p."Name" ILIKE $${queryParams.length + 1}`;
+            queryParams.push(`%${name}%`);
+        }
+        if (size) {
+            query += ` AND s."Size" = $${queryParams.length + 1}`;
+            queryParams.push(size);
+        }
+        if (shoulder_width) {
+            query += ` AND s."Shoulder Width"::int >= $${queryParams.length + 1}`;
+            queryParams.push(shoulder_width);
+        }
+        if (chest_circumference) {
+            query += ` AND s."Chest Circumference"::int >= $${queryParams.length + 1}`;
+            queryParams.push(chest_circumference);
+        }
+        if (hem_width) {
+            query += ` AND s."Hem Width"::int >= $${queryParams.length + 1}`;
+            queryParams.push(hem_width);
+        }
+        if (sleeve_length) {
+            query += ` AND s."Sleeve Length"::int >= $${queryParams.length + 1}`;
+            queryParams.push(sleeve_length);
+        }
+        if (sleeve_opening) {
+            query += ` AND s."Sleeve Opening"::int >= $${queryParams.length + 1}`;
+            queryParams.push(sleeve_opening);
+        }
+        if (total_length) {
+            query += ` AND s."Total Length"::int >= $${queryParams.length + 1}`;
+            queryParams.push(total_length);
+        }
 
-        const byslimProducts = result1.rows;
-        const lookpleProducts = result2.rows;
-
-        const products = byslimProducts.concat(lookpleProducts);
-
-        console.log(products); // 디버깅을 위해 데이터 출력
+        const result = await pool.query(query, queryParams);
+        const products = result.rows;
 
         res.render('index', { products });
     } catch (err) {
