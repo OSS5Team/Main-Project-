@@ -11,3 +11,4 @@ driver = webdriver.Chrome()
 name_list, img_list, link_list, size_dic_list = [], [], [], []
 
 driver.get(url)
+driver.implicitly_wait(time_to_wait=5)
