@@ -55,3 +55,4 @@ for index in range(3):
 
 
 print(size_dic_list)
+print()
