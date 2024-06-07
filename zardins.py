@@ -47,3 +47,4 @@ def save_size(name_list, size_list):
   size_dic_list.append(test_dic)
 
 print(get_list(main_url))
+print(len(name_list))
