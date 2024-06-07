@@ -26,3 +26,4 @@ for td in td_tags:
 test_dic = {name_list[0]: None}
 temp_size_list = list()
 for i in size_list:
+  if '(' in str(i):
