@@ -24,4 +24,5 @@ for td in td_tags:
       size_list.append(td.text.strip())  
 
 test_dic = {name_list[0]: None}
- temp_size_list = list()
+temp_size_list = list()
+for i in size_list:
