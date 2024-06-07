@@ -49,3 +49,4 @@ def save_size(name_list, size_list):
 print(get_list(main_url))
 print(len(name_list))
 print(len(img_list))
+print(len(link_list))
