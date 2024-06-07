@@ -20,3 +20,4 @@ for td in td_tags:
   if 'style' in td.attrs:
     if td.text.strip()[0] == "모델":
       break 
+    else:
