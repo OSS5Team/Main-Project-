@@ -10,3 +10,4 @@ driver = webdriver.Chrome()
 
 name_list, img_list, link_list, size_dic_list = [], [], [], []
 
+driver.get(url)
