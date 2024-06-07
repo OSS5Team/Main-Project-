@@ -13,3 +13,4 @@ name_list, img_list, link_list, size_dic_list = [], [], [], []
 driver.get(url)
 driver.implicitly_wait(time_to_wait=5)
 page = driver.page_source
+soup = BeautifulSoup(page, "html.parser")
