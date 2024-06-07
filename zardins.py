@@ -21,6 +21,7 @@ for li in list_page:
   for div in divs:
     prd_div = div.find('div', class_='prdImg')
     if prd_div:
+      link_list.append("https://www.byslim.com/" + prd_div.find('a')['href'])
 
 td_tags = soup.find_all("td")
 for td in td_tags:
