@@ -16,3 +16,4 @@ page = driver.page_source
 soup = BeautifulSoup(page, "html.parser")
 
 td_tags = soup.find_all("td")
+for td in td_tags:
