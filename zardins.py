@@ -14,3 +14,5 @@ driver.get(url)
 driver.implicitly_wait(time_to_wait=5)
 page = driver.page_source
 soup = BeautifulSoup(page, "html.parser")
+
+td_tags = soup.find_all("td")
