@@ -51,3 +51,4 @@ print(len(name_list))
 print(len(img_list))
 print(len(link_list))
 for index in range(3):
+  get_size(link_list[index], name_list)
