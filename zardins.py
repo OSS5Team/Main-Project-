@@ -16,6 +16,8 @@ page = driver.page_source
 soup = BeautifulSoup(page, "html.parser")
 list_page = soup.select(".prdList.grid3")
 
+for li in list_page:
+
 td_tags = soup.find_all("td")
 for td in td_tags:
   if 'style' in td.attrs:
@@ -23,6 +25,8 @@ for td in td_tags:
       break 
     else:
       size_list.append(td.text.strip())  
+
+
 
 test_dic = {name_list[0]: None}
 temp_size_list = list()
