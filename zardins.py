@@ -22,3 +22,5 @@ for td in td_tags:
       break 
     else:
       size_list.append(td.text.strip())  
+
+test_dic = {name_list[0]: None}
