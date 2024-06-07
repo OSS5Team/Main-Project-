@@ -19,7 +19,7 @@ list_page = soup.select(".prdList.grid3")
 for li in list_page:
   divs = li.find_all(attrs={'class': "thumbnail"})
   for div in divs:
-
+    prd_div = div.find('div', class_='prdImg')
 
 td_tags = soup.find_all("td")
 for td in td_tags:
