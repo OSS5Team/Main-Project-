@@ -24,7 +24,7 @@ def get_list(url):
         link_list.append("https://www.byslim.com/" + prd_div.find('a')['href'])
         name_list.append(prd_div.find('img')['alt'])
         img_list.append(prd_div.find('img')['src'])
-
+  return "complete getting list data"
 td_tags = soup.find_all("td")
 for td in td_tags:
   if 'style' in td.attrs:
