@@ -34,6 +34,7 @@ def get_size(link_list,name_list):
         break 
       else:
         size_list.append(td.text.strip())  
+  return "complete getting size data"
 
 
 
