@@ -28,3 +28,4 @@ temp_size_list = list()
 for i in size_list:
   if '(' in str(i):
     temp_size_list.append(size_list[size_list.index(i):size_list.index(i)+7])
+test_dic = {name_list[0]:temp_size_list}
