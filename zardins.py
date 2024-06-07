@@ -8,7 +8,7 @@ main_url = "https://www.zardins.com/product/list.html?cate_no=43"
 chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 
-name_list, img_list, link_list, size_dic_list = [], [], [], []
+name_list, img_list, link_list, size_dic_list, size_list, size_list = [], [], [], [], []
 
 driver.get(url)
 driver.implicitly_wait(time_to_wait=5)
