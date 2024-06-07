@@ -20,6 +20,7 @@ for li in list_page:
   divs = li.find_all(attrs={'class': "thumbnail"})
   for div in divs:
     prd_div = div.find('div', class_='prdImg')
+    if prd_div:
 
 td_tags = soup.find_all("td")
 for td in td_tags:
