@@ -45,3 +45,5 @@ def save_size(name_list, size_list):
       temp_size_list.append(size_list[size_list.index(i):size_list.index(i)+7])
   test_dic = {name_list[0]:temp_size_list}
   size_dic_list.append(test_dic)
+
+print(get_list(main_url))
