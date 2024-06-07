@@ -25,13 +25,15 @@ def get_list(url):
         name_list.append(prd_div.find('img')['alt'])
         img_list.append(prd_div.find('img')['src'])
   return "complete getting list data"
-td_tags = soup.find_all("td")
-for td in td_tags:
-  if 'style' in td.attrs:
-    if td.text.strip()[0] == "모델":
-      break 
-    else:
-      size_list.append(td.text.strip())  
+
+def get_size(link_list,name_list):
+  td_tags = soup.find_all("td")
+  for td in td_tags:
+    if 'style' in td.attrs:
+      if td.text.strip()[0] == "모델":
+        break 
+      else:
+        size_list.append(td.text.strip())  
 
 
 
