@@ -21,3 +21,4 @@ for td in td_tags:
     if td.text.strip()[0] == "모델":
       break 
     else:
+      size_list.append(td.text.strip())  
