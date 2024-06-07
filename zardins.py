@@ -14,6 +14,7 @@ driver.get(url)
 driver.implicitly_wait(time_to_wait=5)
 page = driver.page_source
 soup = BeautifulSoup(page, "html.parser")
+list_page = soup.select(".prdList.grid3")
 
 td_tags = soup.find_all("td")
 for td in td_tags:
