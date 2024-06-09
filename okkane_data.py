@@ -36,3 +36,4 @@ for item in items:
     # 사이즈 정보 추출
     size_element = item.find("li", class_="subnames")
     if size_element and size_element.a:
+        sizes = size_element.a.text.strip("[]").split(",")
