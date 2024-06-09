@@ -44,3 +44,5 @@ for item in items:
     review_count_element = item.find("span", class_="snap_review_count")
     if review_count_element:
         review_count = review_count_element.text
+    else:
+        review_count = ""
