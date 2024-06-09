@@ -28,3 +28,5 @@ for item in items:
 
     # 색상 정보 추출
     colors = item.find("li", class_="colorbox")
+    if colors:
+        color_list = [color.get("style").split(":")[1].strip(";") for color in colors.find_all("span")]
