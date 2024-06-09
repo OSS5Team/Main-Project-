@@ -39,3 +39,6 @@ for item in items:
         sizes = size_element.a.text.strip("[]").split(",")
     else:
         sizes = []
+    
+    # 리뷰 수 추출
+    review_count_element = item.find("span", class_="snap_review_count")
