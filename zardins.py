@@ -12,6 +12,8 @@ driver = webdriver.Chrome()
 
 # 리스트 선언
 name_list, img_list, link_list, size_dic_list, size_list, size_list = [], [], [], [], []
+
+# get list 함수 선언
 def get_list(url):
   driver.get(url)
   driver.implicitly_wait(time_to_wait=5)
