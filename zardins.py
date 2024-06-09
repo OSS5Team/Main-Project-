@@ -51,6 +51,7 @@ def save_size(name_list, size_list):
   test_dic = {name_list[0]:temp_size_list}
   size_dic_list.append(test_dic)
 
+# 데이터 확인
 print(get_list(main_url))
 print(len(name_list))
 print(len(img_list))
