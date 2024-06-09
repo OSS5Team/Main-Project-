@@ -23,3 +23,5 @@ for item in items:
     product_name_element = item.find("li", class_="names")
     if product_name_element and product_name_element.a:
         product_name = product_name_element.a.text.strip()
+    else:
+        product_name = ""
