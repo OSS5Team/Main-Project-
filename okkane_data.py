@@ -57,3 +57,4 @@ for item in items:
     # 추가 정보 추출
     extra_info_element = item.find("div", class_="item_de")
     if extra_info_element:
+        extra_info = extra_info_element.text.strip()
