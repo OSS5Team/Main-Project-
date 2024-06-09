@@ -27,3 +27,6 @@ for item in items:
 
     # 리뷰 수 추출
     review_count = item.find("span", class_="snap_review_count").text
+
+    # 가격 정보 추출
+    price = item.find("li", class_="prices").text.strip("원")
