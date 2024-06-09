@@ -51,3 +51,5 @@ for item in items:
     price_element = item.find("li", class_="prices")
     if price_element:
         price = price_element.text.strip("원")
+    else:
+        price = ""
