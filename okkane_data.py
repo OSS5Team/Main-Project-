@@ -34,4 +34,5 @@ for item in items:
     # 데이터 출력
     print("상품명:", product_name)
     print("색상:", ", ".join(color_list))
+    print("사이즈:", ", ".join(sizes))
     
