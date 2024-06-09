@@ -23,3 +23,4 @@ for item in items:
     names = item.find("li", class_="names")
     subnames = item.find("li", class_="subnames")
     product_name = names.a.text.strip()
+    sizes = subnames.a.text.strip("[]").split(",")
