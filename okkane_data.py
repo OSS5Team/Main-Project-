@@ -66,3 +66,4 @@ for item in items:
     data.append({
         "상품명": product_name,
         "색상": ", ".join(color_list),
+        "사이즈": ", ".join(sizes),
