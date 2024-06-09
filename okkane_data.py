@@ -32,3 +32,6 @@ for item in items:
         color_list = [color.get("style").split(":")[1].strip(";") for color in colors.find_all("span")]
     else:
         color_list = []
+
+    # 사이즈 정보 추출
+    size_element = item.find("li", class_="subnames")
