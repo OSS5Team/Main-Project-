@@ -37,3 +37,5 @@ for item in items:
     size_element = item.find("li", class_="subnames")
     if size_element and size_element.a:
         sizes = size_element.a.text.strip("[]").split(",")
+    else:
+        sizes = []
