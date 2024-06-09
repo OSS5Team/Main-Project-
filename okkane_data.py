@@ -13,3 +13,5 @@ soup = BeautifulSoup(html, "html.parser")
 
 # 의류 데이터 추출
 items = soup.find_all("dd")
+
+for item in items:
