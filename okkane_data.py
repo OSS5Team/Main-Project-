@@ -25,3 +25,6 @@ for item in items:
         product_name = product_name_element.a.text.strip()
     else:
         product_name = ""
+
+    # 색상 정보 추출
+    colors = item.find("li", class_="colorbox")
