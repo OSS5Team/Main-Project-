@@ -60,6 +60,6 @@ print(len(link_list))
 for index in range(3):
   get_size(link_list[index], name_list)
 
-
+# 최종 딕셔너리 데이터 확인
 print(size_dic_list)
 print()
