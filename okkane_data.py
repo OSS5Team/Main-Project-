@@ -64,3 +64,4 @@ for item in items:
     
     # 데이터 리스트에 추가
     data.append({
+        "상품명": product_name,
