@@ -41,7 +41,7 @@ def get_size(link_list,name_list):
         size_list.append(td.text.strip())  
   return "complete getting size data"
 
-
+# save size 함수 선언
 def save_size(name_list, size_list):
   test_dic = {name_list[0]: None}
   temp_size_list = list()
