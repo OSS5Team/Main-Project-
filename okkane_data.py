@@ -21,3 +21,5 @@ data = []
 for item in items:
     # 상품명 추출
     product_name_element = item.find("li", class_="names")
+    if product_name_element and product_name_element.a:
+        product_name = product_name_element.a.text.strip()
