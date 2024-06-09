@@ -21,6 +21,7 @@ def get_list(url):
   soup = BeautifulSoup(page, "html.parser")
   list_page = soup.select(".prdList.grid3")
 
+  # 데이터 get
   for li in list_page:
     divs = li.find_all(attrs={'class': "thumbnail"})
     for div in divs:
