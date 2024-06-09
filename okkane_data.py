@@ -46,3 +46,6 @@ for item in items:
         review_count = review_count_element.text
     else:
         review_count = ""
+    
+    # 가격 정보 추출
+    price_element = item.find("li", class_="prices")
