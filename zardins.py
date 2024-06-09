@@ -8,6 +8,8 @@ main_url = "https://www.zardins.com/product/list.html?cate_no=43"
 chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 
+
+# 리스트 선언
 name_list, img_list, link_list, size_dic_list, size_list, size_list = [], [], [], [], []
 def get_list(url):
   driver.get(url)
