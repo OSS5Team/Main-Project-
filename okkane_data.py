@@ -18,3 +18,6 @@ for item in items:
 # 색상 정보 추출
     colors = item.find("li", class_="colorbox")
     color_list = [color.get("style").split(":")[1].strip(";") for color in colors.find_all("span")]
+
+ # 상품명, 사이즈 정보 추출
+    names = item.find("li", class_="names")
