@@ -53,3 +53,6 @@ for item in items:
         price = price_element.text.strip("원")
     else:
         price = ""
+
+    # 추가 정보 추출
+    extra_info_element = item.find("div", class_="item_de")
