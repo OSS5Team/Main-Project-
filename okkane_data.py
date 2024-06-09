@@ -50,3 +50,4 @@ for item in items:
     # 가격 정보 추출
     price_element = item.find("li", class_="prices")
     if price_element:
+        price = price_element.text.strip("원")
