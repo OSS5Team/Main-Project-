@@ -71,3 +71,6 @@ for item in items:
         "가격": price,
         "추가 정보": extra_info
     })
+
+# 데이터프레임 생성
+df = pd.DataFrame(data)
