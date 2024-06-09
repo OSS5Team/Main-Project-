@@ -60,3 +60,7 @@ for item in items:
         extra_info = extra_info_element.text.strip()
     else:
         extra_info = ""
+
+    
+    # 데이터 리스트에 추가
+    data.append({
