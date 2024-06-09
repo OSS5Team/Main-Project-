@@ -22,3 +22,4 @@ for item in items:
  # 상품명, 사이즈 정보 추출
     names = item.find("li", class_="names")
     subnames = item.find("li", class_="subnames")
+    product_name = names.a.text.strip()
