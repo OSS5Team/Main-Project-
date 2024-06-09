@@ -30,3 +30,7 @@ for item in items:
 
     # 가격 정보 추출
     price = item.find("li", class_="prices").text.strip("원")
+
+    # 데이터 출력
+    print("상품명:", product_name)
+    
