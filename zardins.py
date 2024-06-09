@@ -5,6 +5,7 @@ import chromedriver_autoinstaller
 
 main_url = "https://www.zardins.com/product/list.html?cate_no=43"
 
+# 크롬 드라이브 설치
 chromedriver_autoinstaller.install()
 driver = webdriver.Chrome()
 
