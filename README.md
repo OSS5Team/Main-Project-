@@ -30,12 +30,6 @@
 5. 브랜치에 푸시합니다 (`git push origin feature-branch`).
 6. Pull Request를 생성합니다.
 
-
-## 라이선스
-
-이 프로젝트는 MIT 라이선스에 따라 배포됩니다. 자세한 내용은 `LICENSE` 파일을 참조하십시오.
-
-
 ## 문의
 
 프로젝트 관련 문의 사항이 있으면 `gnsxo2484@sunmoon.ac.kr`으로 연락 주시기 바랍니다.
