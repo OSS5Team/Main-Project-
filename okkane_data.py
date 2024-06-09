@@ -17,3 +17,7 @@ items = soup.find_all("dd", class_="")
 
 # 데이터 저장을 위한 리스트 생성
 data = []
+
+for item in items:
+    # 상품명 추출
+    product_name_element = item.find("li", class_="names")
