@@ -14,11 +14,11 @@
 
 ## 기술 스택
 
-- **프론트엔드**: HTML, CSS, JavaScript, React
-- **백엔드**: Python, Flask
-- **데이터베이스**: SQLite (개발용), PostgreSQL (배포용)
-- **웹 스크래핑**: BeautifulSoup, Scrapy
-- **기타**: Docker, GitHub Actions (CI/CD)
+- **프론트엔드**: HTML, CSS, JavaScript
+- **백엔드**: Python, Node.js
+- **데이터베이스**: PostgreSQL
+- **웹 스크래핑**: BeautifulSoup, requests
+- **기타**: GitHub
 
 
 ## 기여 방법
