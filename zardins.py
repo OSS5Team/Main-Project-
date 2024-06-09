@@ -30,7 +30,7 @@ def get_list(url):
         name_list.append(prd_div.find('img')['alt'])
         img_list.append(prd_div.find('img')['src'])
   return "complete getting list data"
-
+# get size 함수 선언
 def get_size(link_list,name_list):
   td_tags = soup.find_all("td")
   for td in td_tags:
