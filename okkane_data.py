@@ -67,3 +67,7 @@ for item in items:
         "상품명": product_name,
         "색상": ", ".join(color_list),
         "사이즈": ", ".join(sizes),
+        "리뷰 수": review_count,
+        "가격": price,
+        "추가 정보": extra_info
+    })
