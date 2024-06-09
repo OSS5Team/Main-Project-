@@ -15,4 +15,5 @@ soup = BeautifulSoup(html, "html.parser")
 # 의류 데이터 추출
 items = soup.find_all("dd", class_="")
 
-
+# 데이터 저장을 위한 리스트 생성
+data = []
