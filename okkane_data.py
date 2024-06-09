@@ -24,3 +24,6 @@ for item in items:
     subnames = item.find("li", class_="subnames")
     product_name = names.a.text.strip()
     sizes = subnames.a.text.strip("[]").split(",")
+
+    # 리뷰 수 추출
+    review_count = item.find("span", class_="snap_review_count").text
