@@ -35,4 +35,4 @@ for item in items:
     print("상품명:", product_name)
     print("색상:", ", ".join(color_list))
     print("사이즈:", ", ".join(sizes))
-    
+    print("리뷰 수:", review_count)
